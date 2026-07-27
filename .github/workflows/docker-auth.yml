@@ -1,0 +1,20 @@
+name: Docker Hub Authentication Pipeline
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-login:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: login-action@v3
+        env:
+          username: ${{vars.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+        run: echo "Docker Hub Authenticated Successfully!"
+
